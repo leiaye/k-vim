@@ -160,6 +160,11 @@ Plug 'kana/vim-textobj-entire'
 " 增加缩进文本对象: i   dai yai cii - 相同缩进属于同一块
 Plug 'kana/vim-textobj-indent'
 
+" 搜索代码
+Plug 'rking/ag.vim'
+let g:ackprg = 'ag --nogroup --nocolor --column'
+map <c-a> :Ag!<space>
+
 if count(g:bundle_groups, 'tmux')
     " tmux
     " For tmux navigator Ctrl-hjkl
