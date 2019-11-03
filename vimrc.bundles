@@ -164,6 +164,7 @@ Plug 'kana/vim-textobj-indent'
 Plug 'rking/ag.vim'
 let g:ackprg = 'ag --nogroup --nocolor --column'
 map <c-a> :Ag!<space>
+nnoremap <buffer> <leader>a :Ag!<space>  <c-r>=expand('<cword>')<cr><cr>
 
 if count(g:bundle_groups, 'tmux')
     " tmux
