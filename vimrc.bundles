@@ -521,6 +521,9 @@ endif
 " nerdcommenter {{{
     let g:NERDSpaceDelims=1
     let g:NERDAltDelims_python = 1
+    map <leader><leader>cc <plug>NERDCommenterComment
+    map <leader><leader>cs <plug>NERDCommenterSexy
+    map <leader><leader>cu <plug>NERDCommenterUncomment
 " }}}
 
 " trailingwhitespace {{{
