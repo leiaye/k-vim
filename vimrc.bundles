@@ -17,7 +17,7 @@ filetype off " required! turn off
 " inspired by spf13, 自定义需要的插件集合
 if !exists('g:bundle_groups')
     " let g:bundle_groups=['python', 'javascript', 'golang', 'php', 'ruby', 'shell', 'markdown', 'html', 'css', 'less', 'coffeescript', 'tmux', 'json', 'beta']
-    let g:bundle_groups=['python', 'javascript', 'markdown', 'html', 'css', 'tmux', 'beta']
+    let g:bundle_groups=['python', 'javascript', 'markdown', 'html', 'css', 'tmux', 'beta', 'shell']
 endif
 
 " ----------------------------------------------------------------------------
@@ -164,7 +164,7 @@ Plug 'kana/vim-textobj-indent'
 Plug 'rking/ag.vim'
 let g:ackprg = 'ag --nogroup --nocolor --column'
 map <c-a> :Ag!<space>
-nnoremap <buffer> <leader>a :Ag!<space>  <c-r>=expand('<cword>')<cr><cr>
+nnoremap <leader>a :Ag!<space>  <c-r>=expand('<cword>')<cr><cr>
 
 if count(g:bundle_groups, 'tmux')
     " tmux
@@ -445,6 +445,7 @@ endif
     nnoremap <leader>cf :cscope find f  <c-r>=expand('<cfile>')<cr><cr>
     nnoremap <leader>ci :cscope find i ^<c-r>=expand('<cfile>')<cr>$<cr>
     nnoremap <leader>cd :cscope find d  <c-r>=expand('<cword>')<cr><cr>
+    nnoremap <leader>ca :cscope find a  <c-r>=expand('<cword>')<cr><cr>
 " }}}
 
 " ################### 自动补全 ###################
@@ -551,6 +552,8 @@ endif
     map <leader><leader>cc <plug>NERDCommenterComment
     map <leader><leader>cs <plug>NERDCommenterSexy
     map <leader><leader>cu <plug>NERDCommenterUncomment
+    map <leader><leader>ci <plug>NERDCommenterInvert
+    map <leader><leader>ca <plug>NERDCommenterAltDelims
 " }}}
 
 " trailingwhitespace {{{
@@ -638,12 +641,12 @@ endif
     let g:ctrlp_mruf_max=500
     let g:ctrlp_follow_symlinks=1
     " 如果安装了ag, 使用ag
-    " if executable('ag')
-    " " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-    " let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-    " " ag is fast enough that CtrlP doesn't need to cache
-    " let g:ctrlp_use_caching = 0
-    " endif
+    if executable('ag')
+    " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+    let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+    " ag is fast enough that CtrlP doesn't need to cache
+    let g:ctrlp_use_caching = 0
+    endif
 
     " ctrlpfunky
     " ctrlp插件1 - 不用ctag进行函数快速跳转
@@ -853,6 +856,16 @@ endif
         \ 'ctagsbin'  : 'gotags',
         \ 'ctagsargs' : '-sort -silent'
     \ }
+
+    let g:tagbar_type_lua = {
+      \ 'ctagstype' : 'lua',
+      \ 'kinds' : [
+        \ 'm:modules:0:0',
+        \ 'f:functions:0:1',
+        \ 'v:locals:0:0'
+      \ ],
+      \ 'sort' : 0
+      \ }
 " }}}
 
 
